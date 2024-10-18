@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xmldb>
+    <table name="user_register">
+        <keys>
+            <key name='primary' type='primary' fields='id' />
+        </keys>
+        <fields>
+            <field name='id' type='int' length='255' notnull='true' sequence='true'/>
+            <field name='email' type='varchar' length='50' notnull='true' comment='user email address'/>
+            <field name='firstname' type='varchar' length='50' notnull='true'/>
+            <field name='lastname' type='varchar' length='50' notnull='true'/>
+            <field name='country' type='varchar' length='50' notnull='true'/>
+            <field name='mobile_phone' type='varchar' length='10' notnull='true'/>
+            <field name='created_at' type='int' size='10' unsigned='true' notnull='true' default='0'>
+             <field name='updated_at' type='int' size='10' unsigned='true' notnull='true' default='0'>
+        </fields>
+        <indexes>
+            <index name='email_unique' unique='true' fields='email'>
+        </indexes>
+    </table>
+</xmldb>

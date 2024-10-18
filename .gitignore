@@ -19,6 +19,7 @@
 # Temporary files including undo
 *~
 #
+.env
 moodledata/
 /config.php
 /tags

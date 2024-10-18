@@ -23,6 +23,3 @@
  */
 
  $string['pluginname'] = 'user_register';
-
-
-

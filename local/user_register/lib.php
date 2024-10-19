@@ -21,9 +21,7 @@
  * @copyright 2024, Paris Charalampidis
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
+// Ensure that this file is included only in the Moodle context.
 defined('MOODLE_INTERNAL') || die();
 
-
-
-
-?>

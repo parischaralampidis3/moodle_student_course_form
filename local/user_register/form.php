@@ -31,80 +31,80 @@ defined('MOODLE_INTERNAL') || die();
  * @copyright 2024, Paris Charalampidis
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
- //require_once("config.php");
- require_once("$CFG->libdir/formslib.php");
 
- class user_register_form extends moodleform{
+require_once("$CFG->libdir/formslib.php");
 
-    public function definition(){
+class user_register_form extends moodleform
+{
+
+    public function definition()
+    {
         //a form component is gene   
         $mform = $this->_form;
         //initiate an array for a set of buttons
         $buttonarray = [];
         //this blocks handle the generation of form elements.      
-        $mform->addElement('email', 'email', get_string('email').['placeholder'=>get_string('Please enter your email')]);
-        $mform->addElement('text', 'firstname', get_string('firstname'),['placeholder'=>get_string('Please enter your firstname')]);
-        $mform->addElement('text', 'lastname',get_string('lastname'),['placeholder'=>get_string('Please enter your lastname')]);
-        $mform->addElement('text', 'country', get_string('country'),['placeholder'=>get_string('Please enter your country')]);
-        $mform->addElement('text', 'mobile_phone', get_string('mobile_phone'),['placeholder'=>get_string('please fill your phone number')]);
+        $mform->addElement('email', 'email', get_string('email'), ['placeholder' => get_string('Please enter your email')]);
+        $mform->addElement('text', 'firstname', get_string('firstname'), ['placeholder' => get_string('Please enter your firstname')]);
+        $mform->addElement('text', 'lastname', get_string('lastname'), ['placeholder' => get_string('Please enter your lastname')]);
+        $mform->addElement('text', 'country', get_string('country'), ['placeholder' => get_string('Please enter your country')]);
+        $mform->addElement('text', 'mobile_phone', get_string('mobile_phone'), ['placeholder' => get_string('please fill your phone number')]);
 
         //this block handles  the type of elements.
-        $mform->setType('email',PARAM_EMAIL);
-        $mform->setType('firstname',PARAM_NOTAGS);
-        $mform->setType('lastname',PARAM_NOTAGS);
+        $mform->setType('email', PARAM_EMAIL);
+        $mform->setType('firstname', PARAM_NOTAGS);
+        $mform->setType('lastname', PARAM_NOTAGS);
         $mform->setType('country', PARAM_NOTAGS);
         $mform->setType('mobile_phone', PARAM_NOTAGS);
-    
+
         //this block handles requirement at the form fields.
-        $mform->addRule('email',null,'required',null,'client');
-        $mform->addRule('firstname',null,'required',null,'client');
-        $mform->addRule('lastname',null,'required',null,'client');
-        $mform->addRule('country',null,'required',null,'client');
-        $mform->addRule('mobile_phone',null,'required',null,'client');
+        $mform->addRule('email', null, 'required', null, 'client');
+        $mform->addRule('firstname', null, 'required', null, 'client');
+        $mform->addRule('lastname', null, 'required', null, 'client');
+        $mform->addRule('country', null, 'required', null, 'client');
+        $mform->addRule('mobile_phone', null, 'required', null, 'client');
 
-        $buttonarray[] = &$mform->createElement('submit','submitbutton',get_strings('savechanges'));
-        $buttonarray[] = &$mform ->createElement('cancel','cancelbutton',get_string('cancel'));
+        //an array of buttons is set for save and cancel funtioncalities
+        $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('savechanges'));
+        $buttonarray[] = &$mform->createElement('cancel', 'cancelbutton', get_string('cancel'));
         
-        $mform-> addGroup($buttonarray,'buttonarr','',array(''),false);
-        $mform-> closeHeaderBefore('buttonarr');
+        $mform->addGroup($buttonarray, 'buttonarr', '', array(''), false);
+        $mform->closeHeaderBefore('buttonarr');
     }
     
-    public function validation($data, $files){
-    $errors = [];
-    //validate email
-    if(empty($data['email'])){
-        $errors['email'] = get_string('email is required', 'local_user_register');
-    }else if(!filter_var($data['email'], FILTER_VALIDATE_EMAIL)){
-        $errors['email'] = get_string('email_invalid', 'local_user_register');
+    public function validation($data, $files)
+    //this block adds a logic for validating the form fields and display errors
+    {
+        $errors = [];
+        //validate email
+        if (empty($data['email'])) {
+            $errors['email'] = get_string('emailisrequired', 'local_user_register');
+        } else if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+            $errors['email'] = get_string('emailinvalid', 'local_user_register');
+        }
+        //validate firstname
+        if (empty($data['firstname'])) {
+            $errors['firstname'] = get_string('firstnameisrequired', 'local_user_register');
+        }
+
+        //validate lastname
+        if (empty($data['lastname'])) {
+            $errors['lastname'] = get_string('lastnameisrequired', 'local_user_register');
+        }
+
+        //validate country
+        if (empty($data['country'])) {
+            $errors['country'] = get_string('countryisrequired', 'local_user_register');
+        }
+
+        //validate phone number
+
+        if (empty($data['mobile_phone'])) {
+            $errors['mobile_phone'] = get_string('mobilephoneisrequired', 'local_user_register');
+        } else if (!is_numeric($data['mobile_phone'])) {
+            $errors['mobile_phone'] = get_string('phonenumbermustbenumeric', 'local_user_register');
+        }
+        //the error array is retured after the conditional logic
+        return $errors;
     }
-    //validate firstname
-    if(empty($data['firstname'])){
-        $errors['firstname'] = get_string('first name field is required', 'local_user_register');
-    }
-    
-    //validate lastname
-    if(empty($data['lastname'])){
-        $errors['lastname'] = get_string('last name is required', 'local_user_register');
-    }
-
-    //validate country
-    if(empty($data['country'])){
-        $errors['country'] = get_string('country field is required', 'local_user_register');
-    }
-
-    //validate phone number
-
-    if(empty($data['mobile_phone'])){
-        $errors['mobile_phone'] = get_string('phone number is required','local_user_register');
-    }
-    else if(!is_numeric ($data['mobile_phone'])){
-        $errors['mobile_phone'] = get_string('phone number is not numeric', 'local_user_register');
-    }
-    return $errors;
-
-}
-
- };
-
-
-?>
+};

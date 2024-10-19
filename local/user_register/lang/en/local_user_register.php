@@ -22,4 +22,22 @@
  * @license    http://www.gnu.org/copyleft/gpl.html gnu gpl v3 or later
  */
 
+ //I set language strings to support displaying definitions at the front-end moodle dashboard.
  $string['pluginname'] = 'user_register';
+ $string['email'] = 'email';
+ $string['firstname'] = 'firstname';
+ $string['lastname'] = 'lastname';
+ $string['country'] = 'country';
+ $string['mobile_phone'] = 'mobile phone';
+
+ //string defination for form validation
+
+ $string['emailisrequired'] = 'Email is required';
+ $string['emailinvalid'] = 'Email is invalid';
+ $string['firstnameisrequired'] = 'First name is required';
+ $string['lastnameisrequired'] = 'Last name is required';
+ $string['countryisrequired'] = 'Country is required';
+ $string['mobilephoneisrequired'] = 'Mobile phone is required';
+ $string['mobilephonemustbenumeric']  = 'Mobile phone must be numeric';
+
+  $string['submitformmessage'] = 'Form is submitted';

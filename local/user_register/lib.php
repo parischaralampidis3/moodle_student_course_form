@@ -25,3 +25,25 @@
 // Ensure that this file is included only in the Moodle context.
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Extend the global navigation with a custom link to the user register form.
+ *
+ * @param global_navigation $nav The global navigation object.
+ */
+
+function local_user_register_extend_settings_navigation(global_navigation $nav){
+    global $CFG, $PAGE;
+
+    if($PAGE->pagetype == 'site-index'){
+        $node = $nav->add(
+            get_string('user register','local_user_register'),
+            new moodle_url('local/user_register/index.php'),
+            navigation_node::TYPE_CUSTOM,
+            null,
+            null,
+        );
+    }
+    $node->title = get_string('registertooltip', 'local_user_register'); 
+
+    if(!is_siteadmin($node->hidden = true));
+}

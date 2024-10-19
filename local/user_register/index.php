@@ -36,7 +36,7 @@ else if($data = $mform->get_data()){
 }
 echo $OUTPUT->header();
 if(!empty($message)){
-    echo html::writter::tag('div', $message[0],['class'=>'alert alert']);
+    echo html_writer::tag('div', $message[0],['class'=>'alert alert']);
 }
 $mform->display();
 echo $OUTPUT->footer();

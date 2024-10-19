@@ -41,3 +41,5 @@
  $string['mobilephonemustbenumeric']  = 'Mobile phone must be numeric';
 
   $string['submitformmessage'] = 'Form is submitted';
+
+  $string['registertooltip'] = 'Click to register a user';

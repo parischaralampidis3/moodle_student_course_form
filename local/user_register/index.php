@@ -48,6 +48,10 @@ if ($mform->is_cancelled()) {
 //initiate global database variable
     global $DB;
 //initiat a new moodle class
+$temp_password = generate_password();
+//hash the password
+$hashed_password = hash_internal_user_password($temp_password);
+//storing a temp passwod 
     $record = new StdClass();
 //use the parameter $data to fetch the form data and save at the class for each field.
     $record->email = $data->email;
@@ -55,9 +59,21 @@ if ($mform->is_cancelled()) {
     $record->lastname = $data->lastname;
     $record->country = $data->country;
     $record->mobilephone = !empty($data->mobile_phone) ? $data->mobile_phone : null;
+//use parameters for password in order to store hashed password.
+    $record->password = $hashed_password;
+//set 1 (true) for force password at the first login.
+    $record->forcepasswordchange = 1;
+
     $record->timecreated = time();
 
+
     $DB->insert_record('user_register',$record);
+
+    //implement email functionality for user.
+    $email_subject = 'Welcome to the platform!';
+    $email_body = "Dear {$data->firstname},\n\nYour account has been created. Here is your temporary password: {$temp_password}\nPlease log in and change it as soon as possible.\n\nBest regards,\nThe Team";
+    //use built in function for send an email at user
+    email_to_user($data->email,get_admin(),$email_subject,$email_body);
 
     $message = [];
     // This method displays the form at the view

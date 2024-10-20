@@ -1,4 +1,4 @@
-<?php 
+<?php
 // This file is part of Moodle - https://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -15,31 +15,33 @@
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * You may localized strings in your plugin
+ * Localized strings for the local_user_register plugin
  *
  * @package    local_user_register
  * @copyright  2024 Paris Charalampidis
- * @license    http://www.gnu.org/copyleft/gpl.html gnu gpl v3 or later
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
- //I set language strings to support displaying definitions at the front-end moodle dashboard.
- $string['pluginname'] = 'user_register';
- $string['email'] = 'email';
- $string['firstname'] = 'firstname';
- $string['lastname'] = 'lastname';
- $string['country'] = 'country';
- $string['mobile_phone'] = 'mobile phone';
+// Define the missing strings here
+$string['pluginname'] = 'User Register';
+$string['user_register'] = 'User Registration Form';
+$string['user_description'] = 'Fill out this form to register a new user.';
 
- //string defination for form validation
+// Add any other form field labels and validation messages
+$string['email'] = 'Email';
+$string['firstname'] = 'First name';
+$string['lastname'] = 'Last name';
+$string['country'] = 'Country';
+$string['mobile_phone'] = 'Mobile phone';
 
- $string['emailisrequired'] = 'Email is required';
- $string['emailinvalid'] = 'Email is invalid';
- $string['firstnameisrequired'] = 'First name is required';
- $string['lastnameisrequired'] = 'Last name is required';
- $string['countryisrequired'] = 'Country is required';
- $string['mobilephoneisrequired'] = 'Mobile phone is required';
- $string['mobilephonemustbenumeric']  = 'Mobile phone must be numeric';
+$string['emailisrequired'] = 'Email is required';
+$string['emailinvalid'] = 'Email is invalid';
+$string['firstnameisrequired'] = 'First name is required';
+$string['lastnameisrequired'] = 'Last name is required';
+$string['countryisrequired'] = 'Country is required';
+$string['mobilephoneisrequired'] = 'Mobile phone is required';
+$string['mobilephonemustbenumeric'] = 'Mobile phone must be numeric';
 
-  $string['submitformmessage'] = 'Form is submitted';
-
-  $string['registertooltip'] = 'Click to register a user';
+$string['submitformmessage'] = 'Form submitted successfully';
+$string['userregister'] = 'User Register';
+$string['registertooltip'] = 'Click to register a new user';

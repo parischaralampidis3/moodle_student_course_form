@@ -31,19 +31,26 @@ defined('MOODLE_INTERNAL') || die();
  * @param global_navigation $nav The global navigation object.
  */
 
-function local_user_register_extend_settings_navigation(global_navigation $nav){
+function local_user_register_extend_navigation(global_navigation $nav) {
     global $CFG, $PAGE;
 
-    if($PAGE->pagetype == 'site-index'){
-        $node = $nav->add(
-            get_string('user register','local_user_register'),
-            new moodle_url('local/user_register/index.php'),
-            navigation_node::TYPE_CUSTOM,
-            null,
-            null,
-        );
-    }
-    $node->title = get_string('registertooltip', 'local_user_register'); 
+    // Check if the current page type is either 'site-index' (homepage) or 'my-index' (dashboard)
+    if ($PAGE->pagetype === 'site-index' || $PAGE->pagetype === 'my-index') {
 
-    if(!is_siteadmin($node->hidden = true));
+        // Add a node (link) to the navigation
+        $node = $nav->add(
+            get_string('userregister', 'local_user_register'),  // Link text
+            new moodle_url('/local/user_register/index.php'),   // URL for the link
+            navigation_node::TYPE_CUSTOM                        // Type of link (custom link)
+        );
+
+        // Set a tooltip for the link
+        if ($node) {
+            $node->title = get_string('registertooltip', 'local_user_register');
+        }
+
+        if (is_siteadmin()) {
+    $node->hidden = true;
+}
+    }
 }

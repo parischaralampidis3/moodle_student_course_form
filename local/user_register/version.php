@@ -14,17 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * Version metadata for the plugintype_pluginname plugin.
- *
- * @package   local_userRegister
- * @copyright 2024,Paris Charalampidis
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-
 defined('MOODLE_INTERNAL') || die();
-$plugin->component = 'local_user_register';
-$plugin->release = '0.1.0';
-$plugin->version = 2024101800;
-$plugin->requires = 2024011500;
-$plugin->maturity = MATURITY_ALPHA;
+
+$plugin->component = 'local_user_register'; // Full name of the plugin (used for diagnostics).
+$plugin->version   = 2024010100;            // The current version (Date: YYYYMMDDXX).
+$plugin->requires  = 2020110900;            // Moodle version required.
+$plugin->release   = 'v1.0';                // Plugin release version.
+$plugin->maturity  = MATURITY_STABLE;       // Plugin maturity level.

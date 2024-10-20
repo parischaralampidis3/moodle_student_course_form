@@ -1,23 +1,50 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<xmldb>
-    <tables>
-        <table name="user_register">
-            <fields>
-                <field name="id" type="int" length="10" notnull="true" sequence="true" comment="primary id"/>
-                <field name="email" type="varchar" length="50" notnull="true" comment="user email address"/>
-                <field name="firstname" type="varchar" length="50" notnull="true" comment="user first name"/>
-                <field name="lastname" type="varchar" length="50" notnull="true" comment="user last name"/>
-                <field name="country" type="varchar" length="50" notnull="true" comment="user country"/>
-                <field name="mobile_phone" type="varchar" length="10" notnull="true" comment="user mobile phone"/>
-                <field name="created_at" type="int" length="10" unsigned="true" notnull="true" default="0" comment="creation timestamp"/>
-                <field name="updated_at" type="int" length="10" unsigned="true" notnull="true" default="0" comment="update timestamp"/>
-            </fields>
-            <keys>
-                <key name="primary" type="primary" fields="id"/>
-            </keys>
-            <indexes>
-                <index name="email_unique" unique="true" fields="email"/>
-            </indexes>
-        </table>
-    </tables>
-</xmldb>
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This file is part of Moodle - http://moodle.org/
+
+Moodle is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Moodle is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<XMLDB PATH="local/user_register/db" VERSION="2024010100" COMMENT="Schema for User Register plugin">
+    <TABLES>
+
+        <!-- Define the main table -->
+        <TABLE NAME="local_user_register" COMMENT="Table for storing user registration details">
+            <!-- Define fields -->
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" COMMENT="Primary key"/>
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" COMMENT="Foreign key to mdl_user"/>
+                <FIELD NAME="firstname" TYPE="char" LENGTH="255" NOTNULL="true" COMMENT="First name"/>
+                <FIELD NAME="lastname" TYPE="char" LENGTH="255" NOTNULL="true" COMMENT="Last name"/>
+                <FIELD NAME="email" TYPE="char" LENGTH="255" NOTNULL="true" COMMENT="Email address"/>
+                <FIELD NAME="country" TYPE="char" LENGTH="2" NOTNULL="true" COMMENT="Country code (ISO 3166-1 alpha-2)"/>
+                <FIELD NAME="mobile_phone" TYPE="char" LENGTH="20" NOTNULL="false" COMMENT="User's mobile phone number"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" COMMENT="Record creation time"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="false" COMMENT="Record modification time"/>
+            </FIELDS>
+
+            <!-- Define keys -->
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+                <KEY NAME="userid_fk" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id" COMMENT="Foreign key to mdl_user table"/>
+            </KEYS>
+
+            <!-- Define indexes -->
+            <INDEXES>
+                <INDEX NAME="idx_user_email" UNIQUE="true" FIELDS="email"/>
+            </INDEXES>
+        </TABLE>
+
+    </TABLES>
+</XMLDB>

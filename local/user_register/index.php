@@ -15,28 +15,39 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 // Ensure the configuration and environment are loaded.
-
 require_once(__DIR__ . "/../../config.php");
 
-//fetching form functionality from form file at the local plugin
-require_once( $CFG->dirroot . "/local/user_register/form.php");
+// Require the user to be logged in.
+require_login();
 
-//initiation of a moodle form.
+// Set the context for the current page. 
+$context = context_system::instance(); // Use the system context; adjust as needed.
+$PAGE->set_context($context);
+$PAGE->set_url(new moodle_url('/local/user_register/index.php'));
+$PAGE->set_title(get_string('user_register', 'local_user_register'));
+$PAGE->set_heading(get_string('user_register', 'local_user_register'));
+
+// Fetching form functionality from form file at the local plugin
+require_once($CFG->dirroot . "/local/user_register/form.php");
+
+// Initiation of a moodle form.
 $mform = new user_register_form();
 
-//set a guard condition if the form is canceled.
-if($mform->is_cancelled()){
+// Set a guard condition if the form is canceled.
+if ($mform->is_cancelled()) {
     redirect($CFG->wwwroot . "/local/user_register/index.php");
+} else if ($data = $mform->get_data()) {
+    $message = [];
+    // This method displays the form at the view
+    $message[] = get_string('submitformmessage', 'local_user_register');
 }
 
-else if($data = $mform->get_data()){
-    $message = [];
-//this method displays the form at the view
-    $message[] = get_string('submitformmessage','local_user_register;');
-}
+// Display header
 echo $OUTPUT->header();
-if(!empty($message)){
-    echo html_writer::tag('div', $message[0],['class'=>'alert alert']);
+
+if (!empty($message)) {
+    echo html_writer::tag('div', $message[0], ['class' => 'alert alert']);
 }
+
 $mform->display();
 echo $OUTPUT->footer();

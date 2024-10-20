@@ -44,11 +44,11 @@ class user_register_form extends moodleform
         //initiate an array for a set of buttons
         $buttonarray = [];
         //this blocks handle the generation of form elements.      
-        $mform->addElement('email', 'email', get_string('email'), ['placeholder' => get_string('Please enter your email')]);
-        $mform->addElement('text', 'firstname', get_string('firstname'), ['placeholder' => get_string('Please enter your firstname')]);
-        $mform->addElement('text', 'lastname', get_string('lastname'), ['placeholder' => get_string('Please enter your lastname')]);
-        $mform->addElement('text', 'country', get_string('country'), ['placeholder' => get_string('Please enter your country')]);
-        $mform->addElement('text', 'mobile_phone', get_string('mobile_phone'), ['placeholder' => get_string('please fill your phone number')]);
+        $mform->addElement('email', 'email', get_string('email','local_user_register'));
+        $mform->addElement('text', 'firstname', get_string('firstname','local_user_register'));
+        $mform->addElement('text', 'lastname', get_string('lastname','local_user_register'),);
+        $mform->addElement('text', 'country', get_string('country','local_user_register'),);
+        $mform->addElement('text', 'mobile_phone', get_string('mobile_phone','local_user_register'));
 
         //this block handles  the type of elements.
         $mform->setType('email', PARAM_EMAIL);

@@ -32,14 +32,13 @@ defined('MOODLE_INTERNAL') || die();
  */
 
 function local_user_register_extend_navigation(global_navigation $nav) {
-    global $CFG, $PAGE;
+    global $PAGE;
 
     // Check if the current page type is either 'site-index' (homepage) or 'my-index' (dashboard)
     if ($PAGE->pagetype === 'site-index' || $PAGE->pagetype === 'my-index') {
-
         // Add a node (link) to the navigation
         $node = $nav->add(
-            get_string('userregister', 'local_user_register'),  // Link text
+            get_string('user_register', 'local_user_register'),  // Link text
             new moodle_url('/local/user_register/index.php'),   // URL for the link
             navigation_node::TYPE_CUSTOM                        // Type of link (custom link)
         );
@@ -48,9 +47,5 @@ function local_user_register_extend_navigation(global_navigation $nav) {
         if ($node) {
             $node->title = get_string('registertooltip', 'local_user_register');
         }
-
-        if (is_siteadmin()) {
-    $node->hidden = true;
-}
     }
 }

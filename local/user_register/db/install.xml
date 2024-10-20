@@ -20,7 +20,7 @@ along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
     <TABLES>
 
         <!-- Define the main table -->
-        <TABLE NAME="local_user_register" COMMENT="Table for storing user registration details">
+        <TABLE NAME="mdl_user_register" COMMENT="Table for storing user registration details">
             <!-- Define fields -->
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" COMMENT="Primary key"/>
@@ -29,7 +29,7 @@ along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
                 <FIELD NAME="lastname" TYPE="char" LENGTH="255" NOTNULL="true" COMMENT="Last name"/>
                 <FIELD NAME="email" TYPE="char" LENGTH="255" NOTNULL="true" COMMENT="Email address"/>
                 <FIELD NAME="country" TYPE="char" LENGTH="2" NOTNULL="true" COMMENT="Country code (ISO 3166-1 alpha-2)"/>
-                <FIELD NAME="mobile_phone" TYPE="char" LENGTH="20" NOTNULL="false" COMMENT="User's mobile phone number"/>
+                <FIELD NAME="mobile_phone" TYPE="char" LENGTH="20" NOTNULL="true" COMMENT="User's mobile phone number"/>
                 <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" COMMENT="Record creation time"/>
                 <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="false" COMMENT="Record modification time"/>
             </FIELDS>

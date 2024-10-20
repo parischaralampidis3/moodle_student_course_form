@@ -37,41 +37,40 @@ require_once("$CFG->libdir/formslib.php");
 class user_register_form extends moodleform
 {
 
-    public function definition()
+      public function definition()
     {
-        //a form component is gene   
         $mform = $this->_form;
-        //initiate an array for a set of buttons
-        $buttonarray = [];
-        //this blocks handle the generation of form elements.      
-        $mform->addElement('email', 'email', get_string('email','local_user_register'));
+        
+        // Adding email field
+        $mform->addElement('text', 'email', get_string('email','local_user_register'));
+        
+        // Adding other fields
         $mform->addElement('text', 'firstname', get_string('firstname','local_user_register'));
-        $mform->addElement('text', 'lastname', get_string('lastname','local_user_register'),);
-        $mform->addElement('text', 'country', get_string('country','local_user_register'),);
+        $mform->addElement('text', 'lastname', get_string('lastname','local_user_register'));
+        $mform->addElement('text', 'country', get_string('country','local_user_register'));
         $mform->addElement('text', 'mobile_phone', get_string('mobile_phone','local_user_register'));
-
-        //this block handles  the type of elements.
+        
+        // Setting types
         $mform->setType('email', PARAM_EMAIL);
         $mform->setType('firstname', PARAM_NOTAGS);
         $mform->setType('lastname', PARAM_NOTAGS);
         $mform->setType('country', PARAM_NOTAGS);
         $mform->setType('mobile_phone', PARAM_NOTAGS);
 
-        //this block handles requirement at the form fields.
+        // Setting required fields
         $mform->addRule('email', null, 'required', null, 'client');
         $mform->addRule('firstname', null, 'required', null, 'client');
         $mform->addRule('lastname', null, 'required', null, 'client');
         $mform->addRule('country', null, 'required', null, 'client');
         $mform->addRule('mobile_phone', null, 'required', null, 'client');
-
-        //an array of buttons is set for save and cancel funtioncalities
+        
+        // Buttons
         $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('savechanges'));
         $buttonarray[] = &$mform->createElement('cancel', 'cancelbutton', get_string('cancel'));
         
         $mform->addGroup($buttonarray, 'buttonarr', '', array(''), false);
         $mform->closeHeaderBefore('buttonarr');
     }
-    
     public function validation($data, $files)
     //this block adds a logic for validating the form fields and display errors
     {

@@ -35,6 +35,8 @@ require_once($CFG->dirroot . "/local/user_register/form.php");
 //fetcing file for fetch user
 require_once($CFG->dirroot . "/local/user_register/fetch_user_data.php");
 
+require_once($CFG->dirroot . "/local/user_register/email_verification.php");
+
 $user_data = fetch_user_data();
 
 // Initiation of a moodle form.
@@ -59,15 +61,35 @@ $hashed_password = hash_internal_user_password($temp_password);
     $record->lastname = $data->lastname;
     $record->country = $data->country;
     $record->mobilephone = !empty($data->mobile_phone) ? $data->mobile_phone : null;
+    
+    $record->verification_token = generate_verification_token();
+    $record->verification_token = $verification_token;
+    
+
 //use parameters for password in order to store hashed password.
     $record->password = $hashed_password;
 //set 1 (true) for force password at the first login.
     $record->forcepasswordchange = 1;
 
+
+    $record->token_created_at = time();
+
     $record->timecreated = time();
 
+    //insert records at the db.
 
     $DB->insert_record('user_register',$record);
+
+
+    //set the verification email
+
+     $verification_link = $CFG->wwwroot . "/local/user_register/email_verification.php?token=" . $record->verification_token;
+
+     $verification_email_subject = 'Verify your email';
+     $email_body = "Hi {$record->firstname}, \n\n Please verify your email address by clicking the link below: \n $verification_link\n\n\Best Regards,\nThe team}";
+
+ 
+    email_to_user($record->email, get_admin(),$email_subject, $email_body);
 
     //implement email functionality for user.
     $email_subject = 'Welcome to the platform!';

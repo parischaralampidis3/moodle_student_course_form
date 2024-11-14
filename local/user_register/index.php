@@ -62,7 +62,7 @@ $hashed_password = hash_internal_user_password($temp_password);
     $record->firstname = $data->firstname;
     $record->lastname = $data->lastname;
     $record->country = $data->country;
-    $record->mobilephone = !empty($data->mobile_phone) ? $data->mobile_phone : null;
+    $record->mobile_phone = !empty($data->mobile_phone) ? $data->mobile_phone : null;
     
     $record->verification_token = generate_verification_token();
  

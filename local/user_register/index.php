@@ -96,8 +96,26 @@ $hashed_password = hash_internal_user_password($temp_password);
     //implement email functionality for user.
     $email_subject = 'Welcome to the platform!';
     $email_body = "Dear {$data->firstname},\n\nYour account has been created. Here is your temporary password: {$temp_password}\nPlease log in and change it as soon as possible.\n\nBest regards,\nThe Team";
-    //use built in function for send an email at user
-    email_to_user($data->email,get_admin(),$email_subject,$email_body);
+
+    $recipient = new stdClass();
+$recipient->email = $record->email;
+$recipient->id = 0; // Optional: Temporary user ID, as it's not in the main 'user' table yet.
+$recipient->firstname = $record->firstname;
+$recipient->lastname = $record->lastname;
+
+// Send email
+email_to_user($recipient, get_admin(), $email_subject, $email_body);
+
+$recipient2 = new stdClass();
+$recipient2->email = $data->email;
+$recipient2->id = 0; // Optional
+$recipient2->firstname = $data->firstname;
+$recipient2->lastname = $data->lastname;
+
+email_to_user($recipient2, get_admin(), $email_subject, $email_body);
+
+
+
 
     $message = [];
     // This method displays the form at the view

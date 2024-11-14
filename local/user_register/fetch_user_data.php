@@ -25,4 +25,7 @@ defined('MOODLE_INTERNAL') || die();
     global $DB;
     $sql = "SELECT * FROM {user_register}";
     return $DB->get_records_sql($sql);
- }
+ //could be improved using db moodle method
+//return $DB->get_records('user_register');
+ 
+   }

@@ -49,3 +49,13 @@ function local_user_register_extend_navigation(global_navigation $nav) {
         }
     }
 }
+
+
+/**
+ * Generate a unique verification token
+ *
+ * @return string A unique token for verification
+ */
+function generate_verification_token() {
+    return bin2hex(random_bytes(16)); // Generates a 32-character token
+}

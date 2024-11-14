@@ -19,6 +19,7 @@
 use core\output\html_writer;
 
 require_once(__DIR__ . "/../../config.php");
+require_once($CFG->dirroot . '/local/user_register/lib.php');
 
 // Require the user to be logged in.
 require_login();
@@ -42,6 +43,7 @@ $user_data = fetch_user_data();
 // Initiation of a moodle form.
 $mform = new user_register_form();
 
+
 // Set a guard condition if the form is canceled.
 if ($mform->is_cancelled()) {
     redirect($CFG->wwwroot . "/local/user_register/index.php");
@@ -63,7 +65,7 @@ $hashed_password = hash_internal_user_password($temp_password);
     $record->mobilephone = !empty($data->mobile_phone) ? $data->mobile_phone : null;
     
     $record->verification_token = generate_verification_token();
-    $record->verification_token = $verification_token;
+ 
     
 
 //use parameters for password in order to store hashed password.
